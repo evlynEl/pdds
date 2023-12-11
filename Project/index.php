@@ -19,7 +19,7 @@
                     Import Data
                 </div>
                 <div class="card-body">
-                    <form action="import.php" method="post" enctype="multipart/form-data">
+                    <form action="coba.php" method="post" enctype="multipart/form-data">
                         <div class="form-group">
                             <label for="csvFile">CSV File:</label>
                             <input type="file" class="form-control-file" id="csvFile" name="csvFile" accept=".csv" required>
