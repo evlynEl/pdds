@@ -213,27 +213,27 @@ function insertToMongoDB($data, $collection)
 if (isset($_POST["import"])) {
     if (isset($_FILES["csvFile"]) && $_FILES["csvFile"]["error"] == UPLOAD_ERR_OK) {
         $file = fopen($_FILES["csvFile"]["tmp_name"], "r");
-        $headers = fgetcsv($file);
+        $headers = fgetcsv($file, 10000, ",");
 
-        while (($row = fgetcsv($file)) !== false) {
+        while (($row = fgetcsv($file, 10000, ",")) !== false) {
             $data = array_combine($headers, $row);
 
-            insertToMySQL($data, 'categories');
+            // insertToMySQL($data, 'categories');
             insertToMySQL($data, 'customers');
-            insertToMySQL($data, 'employees');
-            insertToMySQL($data, 'employee_territories');
-            insertToMySQL($data, 'order_details');
-            insertToMySQL($data, 'orders');
-            insertToMySQL($data, 'products');
-            insertToMySQL($data, 'regions');
-            insertToMySQL($data, 'shippers');
-            insertToMySQL($data, 'suppliers');
-            insertToMySQL($data, 'territories');
+            // insertToMySQL($data, 'employees');
+            // insertToMySQL($data, 'employee_territories');
+            // insertToMySQL($data, 'order_details');
+            // insertToMySQL($data, 'orders');
+            // insertToMySQL($data, 'products');
+            // insertToMySQL($data, 'regions');
+            // insertToMySQL($data, 'shippers');
+            // insertToMySQL($data, 'suppliers');
+            // insertToMySQL($data, 'territories');
 
-            insertToMongoDB($data, 'product_lookup');
-            insertToMongoDB($data, 'employee_lookup');
-            insertToMongoDB($data, 'customer_lookup');
-            insertToMongoDB($data, 'fact_orders');
+            // insertToMongoDB($data, 'product_lookup');
+            // insertToMongoDB($data, 'employee_lookup');
+            // insertToMongoDB($data, 'customer_lookup');
+            // insertToMongoDB($data, 'fact_orders');
         }
 
         fclose($file);
