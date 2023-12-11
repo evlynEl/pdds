@@ -7,15 +7,15 @@ $dbName     = "pdds";
 
 $conn = mysqli_connect($dbHost, $dbUsername, $dbPassword, $dbName);
 
-$cat = 'SELECT * FROM categories';
-$stmt = mysqli_prepare($conn, $cat);
-mysqli_stmt_execute($stmt);
-$result = mysqli_stmt_get_result($stmt);
+// $cat = 'SELECT * FROM categories';
+// $stmt = mysqli_prepare($conn, $cat);
+// mysqli_stmt_execute($stmt);
+// $result = mysqli_stmt_get_result($stmt);
 
-$cust = 'SELECT * FROM customers';
-$stmt = mysqli_prepare($conn, $cust );
-mysqli_stmt_execute($stmt);
-$result_cust = mysqli_stmt_get_result($stmt);
+// $cust = 'SELECT * FROM customers';
+// $stmt = mysqli_prepare($conn, $cust );
+// mysqli_stmt_execute($stmt);
+// $result_cust = mysqli_stmt_get_result($stmt);
 
 // $emp = 'SELECT * FROM employees';
 // $stmt = mysqli_prepare($conn, $emp );
@@ -63,6 +63,6 @@ $result_cust = mysqli_stmt_get_result($stmt);
 // $result_territories = mysqli_stmt_get_result($stmt);
 
 // Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+// if ($conn->connect_error) {
+//     die("Connection failed: " . $conn->connect_error);
+// }
