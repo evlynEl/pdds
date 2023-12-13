@@ -3,7 +3,7 @@
 $dbHost     = "localhost";
 $dbUsername = "root";
 $dbPassword = "";
-$dbName     = "pdds";
+$dbName     = "northwind";
 
 $conn = mysqli_connect($dbHost, $dbUsername, $dbPassword, $dbName);
 
