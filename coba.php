@@ -154,8 +154,7 @@
   
   $script = __DIR__ . DIRECTORY_SEPARATOR . "cobacoba.py";
   $result = shell_exec("python $script");
-  echo "PHP got the result - $result";
-
+  //echo "PHP got the result - $result";
 
   ?>
   

@@ -1,6 +1,8 @@
 import mysql.connector
 import pymongo
 from decimal import Decimal
+import webbrowser
+import sys
 
 def convert_decimal_to_float(data):
     """Recursively convert Decimal values to float."""
@@ -42,6 +44,17 @@ mongodb_dbname = "northwind"
 myclient = pymongo.MongoClient(mongodb_host)
 mydb = myclient[mongodb_dbname]
 
+# Check if collections already have data
+product_lookup_count = mydb["product_lookup"].count_documents({})
+employee_lookup_count = mydb["employee_lookup"].count_documents({})
+fact_orders_count = mydb["fact_orders"].count_documents({})
+customer_lookup_count = mydb["customer_lookup"].count_documents({})
+
+# If all collections have data, redirect to dashboard.html
+if product_lookup_count > 0 and employee_lookup_count > 0 and fact_orders_count > 0 and customer_lookup_count > 0:
+    webbrowser.open("dashboard.html")
+    sys.exit()
+
 # Fetch and insert data for different scenarios
 fetch_and_insert_data("SELECT * FROM products JOIN categories ON products.categoryID = categories.categoryID JOIN suppliers ON products.supplierID = suppliers.supplierID", "product_lookup")
 fetch_and_insert_data("SELECT * FROM employees", "employee_lookup")
@@ -50,3 +63,4 @@ fetch_and_insert_data("SELECT * FROM customers", "customer_lookup")
 
 # Close connections
 mysqldb.close()
+
