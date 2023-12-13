@@ -12,37 +12,37 @@ function insertToMySQL($data, $table)
 
     switch ($table) {
         case 'categories':
-            $columns = ['categoryID', 'categoryName', 'description', 'picture'];
+            $columns = ['`categoryID` int(1) DEFAULT NULL', '`categoryName` varchar(14) DEFAULT NULL', '`description` varchar(58) DEFAULT NULL', '`picture` varchar(256) DEFAULT NULL'];
             break;
         case 'customers':
-            $columns = ['customerID', 'companyName', 'contactName', 'contactTitle', 'address', 'city', 'region', 'postalCode', 'country', 'phone', 'fax'];
+            $columns = ['`customerID` varchar(5) DEFAULT NULL', '`companyName` varchar(36) DEFAULT NULL', '`contactName` varchar(23) DEFAULT NULL', '`contactTitle` varchar(30) DEFAULT NULL', '`address` varchar(46) DEFAULT NULL', '`city` varchar(25) DEFAULT NULL', '`region` varchar(14) DEFAULT NULL', '`postalCode` varchar(8) DEFAULT NULL', '`country` varchar(11) DEFAULT NULL', '`phone` varchar(14) DEFAULT NULL', '`fax` varchar(17) DEFAULT NULL'];
             break;
         case 'employees':
-            $columns = ['employeeID', 'lastName', 'firstName', 'title', 'titleOfCourtesy', 'birthDate', 'address', 'city', 'region', 'postalCode', 'country', 'homePhone', 'extension', 'photo', 'notes', 'reportsTo', 'photoPath'];
+            $columns = ['`employeeID` int(1) DEFAULT NULL', '`lastName` varchar(9) DEFAULT NULL', '`firstName` varchar(8) DEFAULT NULL', '`title` varchar(24) DEFAULT NULL', '`titleOfCourtesy` varchar(4) DEFAULT NULL', '`birthDate` varchar(23) DEFAULT NULL', '`hireDate` varchar(23) DEFAULT NULL', '`address` varchar(29) DEFAULT NULL', '`city` varchar(8) DEFAULT NULL', '`region` varchar(2) DEFAULT NULL', '`postalCode` varchar(7) DEFAULT NULL', '`country` varchar(3) DEFAULT NULL', '`homePhone` varchar(14) DEFAULT NULL', '`extension` int(4) DEFAULT NULL', '`photo` varchar(256) DEFAULT NULL', '`notes` varchar(256) DEFAULT NULL', '`reportsTo` varchar(1) DEFAULT NULL', '`photoPath` varchar(38) DEFAULT NULL'];
             break;
         case 'employee_territories':
-            $columns = ['employeeID', 'territoryID'];
+            $columns = ['`employeeID` int(1) DEFAULT NULL', '`territoryID` varchar(5) DEFAULT NULL'];
             break;
         case 'order_details':
-            $columns = ['orderID', 'productID', 'unitPrice', 'quantity', 'discount'];
+            $columns = ['`orderID` int(5) DEFAULT NULL', '`productID` int(2) DEFAULT NULL', '`unitPrice` decimal(5,2) DEFAULT NULL', '`quantity` int(3) DEFAULT NULL', '`discount` decimal(3,2) DEFAULT NULL'];
             break;
         case 'orders':
-            $columns = ['orderID', 'customerID', 'employeeID', 'orderDate', 'requiredDate', 'shippedDate', 'shipVia', 'freight', 'shipName', 'shipAddress', 'shipCity', 'shipRegion', 'shipPostalCode', 'shipCountry'];
+            $columns = ['`orderID` int(5) DEFAULT NULL', '`customerID` varchar(5) DEFAULT NULL', '`employeeID` int(1) DEFAULT NULL', '`orderDate` varchar(23) DEFAULT NULL', '`requiredDate` varchar(23) DEFAULT NULL', '`shippedDate` varchar(23) DEFAULT NULL', '`shipVia` int(1) DEFAULT NULL', '`freight` decimal(6,2) DEFAULT NULL', '`shipName` varchar(34) DEFAULT NULL', '`shipAddress` varchar(46) DEFAULT NULL', '`shipCity` varchar(25) DEFAULT NULL', '`shipRegion` varchar(14) DEFAULT NULL', '`shipPostalCode` varchar(8) DEFAULT NULL', '`shipCountry` varchar(11) DEFAULT NULL'];
             break;
         case 'products':
-            $columns = ['productID', 'productName', 'supplierID', 'categoryID', 'quantityPerUnit', 'unitPrice', 'unitsInStock', 'unitsOnOrder', 'reorderLevel', 'discontinued'];
+            $columns = ['`productID` int(2) DEFAULT NULL', '`productName` varchar(32) DEFAULT NULL', '`supplierID` int(2) DEFAULT NULL', '`categoryID` int(1) DEFAULT NULL', '`quantityPerUnit` varchar(20) DEFAULT NULL', '`unitPrice` decimal(5,2) DEFAULT NULL', '`unitsInStock` int(3) DEFAULT NULL', '`unitsOnOrder` int(3) DEFAULT NULL', '`reorderLevel` int(2) DEFAULT NULL', '`discontinued` int(1) DEFAULT NULL'];
             break;
         case 'regions':
-            $columns = ['regionID', 'regionDescription'];
+            $columns = ['`regionID` int(1) DEFAULT NULL', '`regionDescription` varchar(8) DEFAULT NULL'];
             break;
         case 'shippers':
-            $columns = ['shipperID', 'companyName', 'phone'];
+            $columns = ['`shipperID` int(1) DEFAULT NULL', '`companyName` varchar(16) DEFAULT NULL', '`phone` varchar(14) DEFAULT NULL'];
             break;
         case 'suppliers':
-            $columns = ['supplierID', 'companyName', 'contactName', 'contactTitle', 'address', 'city', 'region', 'postalCode', 'country', 'phone', 'fax'];
+            $columns = ['`supplierID` int(2) DEFAULT NULL', '`companyName` varchar(38) DEFAULT NULL', '`contactName` varchar(26) DEFAULT NULL', '`contactTitle` varchar(28) DEFAULT NULL', '`address` varchar(45) DEFAULT NULL', '`city` varchar(38) DEFAULT NULL', '`region` varchar(10) DEFAULT NULL', '`postalCode` varchar(8) DEFAULT NULL', '`country` varchar(11) DEFAULT NULL', '`phone` varchar(14) DEFAULT NULL', '`fax` varchar(15) DEFAULT NULL', '`homePage` varchar(90) DEFAULT NULL'];
             break;
         case 'territories':
-            $columns = ['territoryID', 'territoryDescription', 'regionID'];
+            $columns = ['`territoryID` varchar(5) DEFAULT NULL', '`territoryDescription` varchar(15) DEFAULT NULL', '`regionID` int(1) DEFAULT NULL'];
             break;
         default:
             return;
@@ -218,22 +218,22 @@ if (isset($_POST["import"])) {
         while (($row = fgetcsv($file, 10000, ",")) !== false) {
             $data = array_combine($headers, $row);
 
-            // insertToMySQL($data, 'categories');
+            insertToMySQL($data, 'categories');
             insertToMySQL($data, 'customers');
-            // insertToMySQL($data, 'employees');
-            // insertToMySQL($data, 'employee_territories');
-            // insertToMySQL($data, 'order_details');
-            // insertToMySQL($data, 'orders');
-            // insertToMySQL($data, 'products');
-            // insertToMySQL($data, 'regions');
-            // insertToMySQL($data, 'shippers');
-            // insertToMySQL($data, 'suppliers');
-            // insertToMySQL($data, 'territories');
+            insertToMySQL($data, 'employees');
+            insertToMySQL($data, 'employee_territories');
+            insertToMySQL($data, 'order_details');
+            insertToMySQL($data, 'orders');
+            insertToMySQL($data, 'products');
+            insertToMySQL($data, 'regions');
+            insertToMySQL($data, 'shippers');
+            insertToMySQL($data, 'suppliers');
+            insertToMySQL($data, 'territories');
 
-            // insertToMongoDB($data, 'product_lookup');
-            // insertToMongoDB($data, 'employee_lookup');
-            // insertToMongoDB($data, 'customer_lookup');
-            // insertToMongoDB($data, 'fact_orders');
+            insertToMongoDB($data, 'product_lookup');
+            insertToMongoDB($data, 'employee_lookup');
+            insertToMongoDB($data, 'customer_lookup');
+            insertToMongoDB($data, 'fact_orders');
         }
 
         fclose($file);
